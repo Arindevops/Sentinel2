@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel2 - Block Architecture Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atops:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body {
+            font-family: 'Atops', monospace;
+            font-weight: 700;
+            background: #0f172a;
+        }
+        .component-box {
+            border: 2px solid #334155;
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+        .flow-arrow {
+            stroke: #3b82f6;
+            stroke-width: 2;
+            fill: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white p-8">
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto mb-8">
+        <div class="bg-white rounded-lg p-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Sentinel2 - Block Architecture Diagram</h1>
+                    <p class="text-black-600">Integrated Predictive Maintenance System Architecture</p>
+                </div>
+                <button id="generatePdf" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center mr-2">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    Generate PDF
+                </button>
+                <button id="generateJpg" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center">
+                    <i class="fas fa-file-image mr-2"></i>
+                    Generate JPG
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Architecture Diagram -->
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-lg p-6">
+            
+            <!-- Top Row Components -->
+            <div class="grid grid-cols-4 gap-6 mb-8">
+                <!-- Data Layer -->
+                <div class="component-box bg-blue-900 border border-blue-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-database mr-2 text-blue-300"></i>
+                        <h3 class="font-bold text-lg">Data Layer</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-cog mr-2 text-xs text-blue-400"></i>Equipment Data</li>
+                        <li class="flex items-center"><i class="fas fa-tools mr-2 text-xs text-blue-400"></i>Maintenance Logs</li>
+                        <li class="flex items-center"><i class="fas fa-wave-square mr-2 text-xs text-blue-400"></i>Sensor Data</li>
+                        <li class="flex items-center"><i class="fas fa-exclamation-triangle mr-2 text-xs text-blue-400"></i>Incident Reports</li>
+                    </ul>
+                </div>
+
+                <!-- FastAPI Backend -->
+                <div class="component-box bg-teal-900 border border-teal-700 text-white rounded-lg p-4 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-server mr-2 text-teal-300"></i>
+                        <h3 class="font-bold text-lg">FastAPI Backend</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-plug mr-2 text-xs text-teal-400"></i>REST APIs</li>
+                        <li class="flex items-center"><i class="fas fa-route mr-2 text-xs text-teal-400"></i>Endpoints</li>
+                        <li class="flex items-center"><i class="fas fa-shield-alt mr-2 text-xs text-teal-400"></i>Authentication</li>
+                        <li class="flex items-center"><i class="fas fa-tachometer-alt mr-2 text-xs text-teal-400"></i>Performance</li>
+                    </ul>
+                </div>
+
+                <!-- ML Core Engine -->
+                <div class="component-box bg-cyan-900 border border-cyan-700 text-white rounded-lg p-4 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-brain mr-2 text-cyan-300"></i>
+                        <h3 class="font-bold text-lg">ML Core Engine</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-tree mr-2 text-xs text-cyan-400"></i>Random Forest</li>
+                        <li class="flex items-center"><i class="fas fa-chart-line mr-2 text-xs text-cyan-400"></i>HistGradientBoosting</li>
+                        <li class="flex items-center"><i class="fas fa-network-wired mr-2 text-xs text-cyan-400"></i>LSTM (Optional)</li>
+                        <li class="flex items-center"><i class="fas fa-shield-alt mr-2 text-xs text-cyan-400"></i>Isolation Forest</li>
+                    </ul>
+                </div>
+
+                <!-- Google ADK -->
+                <div class="component-box bg-indigo-900 border border-indigo-700 text-white rounded-lg p-4 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-robot mr-2 text-indigo-300"></i>
+                        <h3 class="font-bold text-lg">Google ADK</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-microchip mr-2 text-xs text-indigo-400"></i>Equipment AI</li>
+                        <li class="flex items-center"><i class="fas fa-search mr-2 text-xs text-indigo-400"></i>Search Agent</li>
+                        <li class="flex items-center"><i class="fas fa-processor mr-2 text-xs text-indigo-400"></i>Data Processor</li>
+                        <li class="flex items-center"><i class="fas fa-cog mr-2 text-xs text-indigo-400"></i>Config Mgmt</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Middle Section -->
+            <div class="grid grid-cols-12 gap-6 mb-8">
+                <!-- Business Services Layer -->
+                <div class="col-span-8 component-box bg-slate-900 border border-slate-700 text-white rounded-lg p-4 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-briefcase mr-2 text-slate-300"></i>
+                        <h3 class="font-bold text-lg">Business Services Layer</h3>
+                    </div>
+                    <div class="grid grid-cols-5 gap-3 text-sm">
+                        <div class="text-center">
+                            <i class="fas fa-chart-bar mb-1 text-slate-400"></i>
+                            <div>Predictive Maintenance</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-list mb-1 text-slate-400"></i>
+                            <div>Equipment Management</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-exclamation-triangle mb-1 text-slate-400"></i>
+                            <div>Anomaly Detection</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-tachometer-alt mb-1 text-slate-400"></i>
+                            <div>Risk Assessment</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-database mb-1 text-slate-400"></i>
+                            <div>Data Simulation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADK Agents Configuration -->
+                <div class="col-span-4 component-box bg-purple-900 border border-purple-700 text-white rounded-lg p-4 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-users-cog mr-2 text-purple-300"></i>
+                        <h3 class="font-bold text-lg">ADK Agents Config</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-user-tie mr-2 text-xs text-purple-400"></i>Equipment Intelligence Agent</li>
+                        <li class="flex items-center"><i class="fas fa-search mr-2 text-xs text-purple-400"></i>Google Search Agent</li>
+                        <li class="flex items-center"><i class="fas fa-comment-dots mr-2 text-xs text-purple-400"></i>Sentiment Analysis Agent</li>
+                        <li class="flex items-center"><i class="fas fa-star mr-2 text-xs text-purple-400"></i>Reliability Scoring Agent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Frontend Layer -->
+            <div class="component-box bg-gray-900 border border-gray-700 text-white rounded-lg p-4 mb-8 shadow-lg">
+                <div class="flex items-center mb-3">
+                    <i class="fas fa-desktop mr-2 text-gray-300"></i>
+                    <h3 class="font-bold text-lg">Frontend Layer</h3>
+                </div>
+                <div class="grid grid-cols-6 gap-4 text-sm">
+                    <div class="text-center">
+                        <i class="fas fa-tachometer-alt mb-2 text-2xl text-gray-400"></i>
+                        <div>Dashboard</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-list-ul mb-2 text-2xl text-gray-400"></i>
+                        <div>Equipment List</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-chart-line mb-2 text-2xl text-gray-400"></i>
+                        <div>Analytics</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-compass mb-2 text-2xl text-gray-400"></i>
+                        <div>Navigation</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-eye mb-2 text-2xl text-gray-400"></i>
+                        <div>Data Viewer</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-file-alt mb-2 text-2xl text-gray-400"></i>
+                        <div>Reports</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row Components -->
+            <div class="grid grid-cols-4 gap-6">
+                <!-- External APIs -->
+                <div class="component-box bg-emerald-900 border border-emerald-700 text-white rounded-lg p-4 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-plug mr-2 text-emerald-300"></i>
+                        <h3 class="font-bold text-lg">External APIs</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fab fa-google mr-2 text-xs text-emerald-400"></i>Google Search API</li>
+                        <li class="flex items-center"><i class="fas fa-database mr-2 text-xs text-emerald-400"></i>Equipment Databases</li>
+                    </ul>
+                </div>
+
+                <!-- Testing Framework -->
+                <div class="component-box bg-green-900 border border-green-700 text-white rounded-lg p-4 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-vial mr-2 text-green-300"></i>
+                        <h3 class="font-bold text-lg">Testing Framework</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-xs text-green-400"></i>Unit Tests</li>
+                        <li class="flex items-center"><i class="fas fa-link mr-2 text-xs text-green-400"></i>Integration</li>
+                        <li class="flex items-center"><i class="fas fa-cloud mr-2 text-xs text-green-400"></i>API Tests</li>
+                        <li class="flex items-center"><i class="fas fa-brain mr-2 text-xs text-green-400"></i>ML Tests</li>
+                    </ul>
+                </div>
+
+                <!-- Deployment -->
+                <div class="component-box bg-blue-900 border border-blue-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-rocket mr-2 text-blue-300"></i>
+                        <h3 class="font-bold text-lg">Deployment</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-server mr-2 text-xs text-blue-400"></i>Uvicorn</li>
+                        <li class="flex items-center"><i class="fab fa-docker mr-2 text-xs text-blue-400"></i>Docker Ready</li>
+                        <li class="flex items-center"><i class="fas fa-industry mr-2 text-xs text-blue-400"></i>Production</li>
+                        <li class="flex items-center"><i class="fas fa-terminal mr-2 text-xs text-blue-400"></i>Batch Scripts</li>
+                    </ul>
+                </div>
+
+                <!-- Configuration -->
+                <div class="component-box bg-amber-900 border border-amber-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-cogs mr-2 text-amber-300"></i>
+                        <h3 class="font-bold text-lg">Configuration</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-user-cog mr-2 text-xs text-amber-400"></i>Agent Config</li>
+                        <li class="flex items-center"><i class="fas fa-brain mr-2 text-xs text-amber-400"></i>ML Models</li>
+                        <li class="flex items-center"><i class="fas fa-key mr-2 text-xs text-amber-400"></i>API Keys</li>
+                        <li class="flex items-center"><i class="fas fa-globe mr-2 text-xs text-amber-400"></i>Environment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Connection Arrows SVG -->
+            <svg class="absolute inset-0 pointer-events-none" style="z-index: 10;">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
+                    </marker>
+                    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#10b981" />
+                    </marker>
+                    <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+                    </marker>
+                </defs>
+            </svg>
+
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="max-w-7xl mx-auto mt-8">
+        <div class="bg-white rounded-lg p-6">
+            <h3 class="text-lg font-bold mb-4">Architecture Legend</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-blue-900 border border-blue-700 mr-2 rounded"></div>
+                    <span class="text-sm text-white">Data & Storage</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-teal-900 border border-teal-700 mr-2 rounded"></div>
+                    <span class="text-sm text-white">API & Backend</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-cyan-900 border border-cyan-700 mr-2 rounded"></div>
+                    <span class="text-sm text-white">ML & AI</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-indigo-900 border border-indigo-700 mr-2 rounded"></div>
+                    <span class="text-sm text-white">Google ADK</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PDF and JPG Generation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // PDF Generation functionality
+            document.getElementById('generatePdf').addEventListener('click', function() {
+                const button = this;
+                const originalText = button.innerHTML;
+                
+                // Show loading state
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Generating PDF...';
+                button.disabled = true;
+                
+                // Use browser's print functionality to save as PDF
+                setTimeout(() => {
+                    window.print();
+                    
+                    // Reset button after a delay
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                }, 500);
+            });
+
+            // JPG Generation functionality
+            document.getElementById('generateJpg').addEventListener('click', function() {
+                const button = this;
+                const originalText = button.innerHTML;
+                
+                // Show loading state
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Generating JPG...';
+                button.disabled = true;
+                
+                // Use html2canvas to capture the diagram
+                setTimeout(() => {
+                    if (typeof html2canvas !== 'undefined') {
+                        // Load html2canvas from CDN
+                        const script = document.createElement('script');
+                        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                        script.onload = function() {
+                            // Capture the architecture diagram
+                            const element = document.querySelector('.max-w-7xl');
+                            html2canvas(element, {
+                                backgroundColor: '#0f172a',
+                                scale: 2,
+                                useCORS: true,
+                                allowTaint: true
+                            }).then(canvas => {
+                                // Convert to JPG and download
+                                const link = document.createElement('a');
+                                link.download = 'sentinel2_architecture_diagram_blue_theme.jpg';
+                                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                                link.click();
+                                
+                                // Reset button
+                                button.innerHTML = originalText;
+                                button.disabled = false;
+                            }).catch(error => {
+                                console.error('Error generating JPG:', error);
+                                button.innerHTML = originalText;
+                                button.disabled = false;
+                            });
+                        };
+                        document.head.appendChild(script);
+                    } else {
+                        // Fallback message if html2canvas fails to load
+                        alert('JPG generation requires html2canvas library. Please check your internet connection and try again.');
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }
+                }, 500);
+            });
+        });
+    </script>
+
+    <!-- Print styles for PDF generation -->
+    <style media="print">
+        @page {
+            size: A4;
+            margin: 0.1cm;
+            orientation: landscape;
+        }
+        
+        body {
+            background: #0f172a !important;
+            padding: 0.1cm !important;
+            margin: 0 !important;
+        }
+        
+        .max-w-7xl {
+            max-width: none !important;
+            width: 100% !important;
+        }
+        
+        .grid {
+            display: grid !important;
+        }
+        
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 0.2rem !important;
+        }
+        
+        .grid-cols-6 {
+            grid-template-columns: repeat(6, 1fr) !important;
+            gap: 0.15rem !important;
+        }
+        
+        .grid-cols-12 {
+            grid-template-columns: repeat(12, 1fr) !important;
+            gap: 0.1rem !important;
+        }
+        
+        .col-span-8 {
+            grid-column: span 8 / span 8 !important;
+        }
+        
+        .col-span-4 {
+            grid-column: span 4 / span 4 !important;
+        }
+        
+        .gap-6 {
+            gap: 0.2rem !important;
+        }
+        
+        .gap-4 {
+            gap: 0.15rem !important;
+        }
+        
+        .gap-3 {
+            gap: 0.1rem !important;
+        }
+        
+        .component-box {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            display: block !important;
+            float: none !important;
+            margin-bottom: 0.1rem !important;
+            padding: 0.3rem !important;
+            background: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #f1f5f9 !important;
+        }
+        
+        .bg-blue-900, .bg-teal-900, .bg-cyan-900, .bg-indigo-900, .bg-slate-900, .bg-purple-900, .bg-gray-900, .bg-emerald-900, .bg-green-900, .bg-amber-900 {
+            background: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #f1f5f9 !important;
+        }
+        
+        .shadow-lg, .shadow-xl {
+            box-shadow: none !important;
+        }
+        
+        .text-white {
+            color: #f1f5f9 !important;
+        }
+        
+        .text-2xl {
+            font-size: 1.2rem !important;
+        }
+        
+        .text-lg {
+            font-size: 1.25rem !important;
+        }
+        
+        .text-sm {
+            font-size: 1rem !important;
+        }
+        
+        .text-xs {
+            font-size: 0.875rem !important;
+        }
+        
+        .p-4 {
+            padding: 0.3rem !important;
+        }
+        
+        .p-6 {
+            padding: 0.8rem !important;
+        }
+        
+        .p-8 {
+            padding: 1rem !important;
+        }
+        
+        .mb-2, .mb-3, .mb-4, .mb-8 {
+            margin-bottom: 0.1rem !important;
+        }
+        
+        .mt-8 {
+            margin-top: 0.1rem !important;
+        }
+        
+        .flex {
+            display: flex !important;
+        }
+        
+        .items-center {
+            align-items: center !important;
+        }
+        
+        .justify-between {
+            justify-content: space-between !important;
+        }
+        
+        .space-y-2 > * + * {
+            margin-top: 0.1rem !important;
+        }
+        
+        .rounded-lg {
+            border-radius: 0.3rem !important;
+        }
+        
+        #generatePdf, #generateJpg {
+            display: none !important;
+        }
+        
+        .fa, .fas, .fab {
+            display: none !important;
+        }
+        
+        /* Ensure text is visible */
+        h1, h3, li, div {
+            color: #f1f5f9 !important;
+        }
+        
+        /* Compact layout for print */
+        @media print {
+            .bg-white {
+                background: #0f172a !important;
+            }
+            
+            .component-box {
+                background: #1e293b !important;
+                border: 1px solid #334155 !important;
+                color: #f1f5f9 !important;
+            }
+        }
+    </style>
+</body>
+</html>
