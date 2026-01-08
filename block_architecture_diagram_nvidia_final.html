@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel2 - Block Architecture Diagram with NVIDIA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atops:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body {
+            font-family: 'Atops', monospace;
+            font-weight: 700;
+            background: #0f172a;
+        }
+        .component-box {
+            border: 2px solid #334155;
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+        .nvidia-glow {
+            border: 2px solid #76b900;
+            background: linear-gradient(135deg, #1e293b 0%, #2a3f5f 100%);
+            box-shadow: 0 0 30px rgba(118, 185, 0, 0.8),
+                        0 0 60px rgba(118, 185, 0, 0.6),
+                        0 0 90px rgba(118, 185, 0, 0.4),
+                        inset 0 0 20px rgba(118, 185, 0, 0.2);
+            color: #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+        .nvidia-glow::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #76b900, #00ff00, #76b900);
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0.6;
+            animation: nvidia-glow 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes nvidia-glow {
+            0% { 
+                opacity: 0.6; 
+                box-shadow: 0 0 30px rgba(118, 185, 0, 0.8),
+                        0 0 60px rgba(118, 185, 0, 0.6),
+                        0 0 90px rgba(118, 185, 0, 0.4),
+                        inset 0 0 20px rgba(118, 185, 0, 0.2);
+            }
+            100% { 
+                opacity: 0.9; 
+                box-shadow: 0 0 40px rgba(118, 185, 0, 1),
+                           0 0 80px rgba(114, 172, 16, 0.664)
+                           0 0 120px rgba(118, 185, 0, 0.6),
+                           inset 0 0 30px rgba(118, 185, 0, 0.3);
+            }
+        }
+        .nvidia-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            filter: brightness(0) invert(1);
+        }
+        .flow-arrow {
+            stroke: #3b82f6;
+            stroke-width: 2;
+            fill: none;
+        }
+        .testing-lock {
+            position: relative;
+        }
+        .testing-lock::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: rgba(118, 185, 0, 0.2);
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0.6;
+            animation: testing-glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes testing-glow {
+            0% { 
+                opacity: 0.4; 
+                box-shadow: 0 0 15px rgba(118, 185, 0, 0.3),
+                           0 0 60px rgba(118, 185, 0, 0.6),
+                           inset 0 0 20px rgba(118, 185, 0, 0.2);
+            }
+            100% { 
+                opacity: 0.9; 
+                box-shadow: 0 0 40px rgba(118, 185, 0, 1),
+                           0 0 80px rgba(114, 172, 16, 0.664)
+                           0 0 120px rgba(118, 185, 0, 0.6),
+                           inset 0 0 30px rgba(118, 185, 0, 0.3);
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white p-8">
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto mb-8">
+        <div class="bg-white rounded-lg p-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Sentinel2 - Block Architecture Diagram with NVIDIA</h1>
+                    <p class="text-black-600">Integrated Predictive Maintenance System Architecture with NVIDIA AI/ML</p>
+                </div>
+                <button id="generateJpg" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center">
+                    <i class="fas fa-file-image mr-2"></i>
+                    Generate JPG
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Architecture Diagram -->
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-lg p-6">
+            
+            <!-- Top Row Components -->
+            <div class="grid grid-cols-4 gap-6 mb-8">
+                <!-- Data Layer -->
+                <div class="component-box bg-blue-900 border border-blue-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-database mr-2 text-blue-300"></i>
+                        <h3 class="font-bold text-lg">Data Layer</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-cog mr-2 text-xs text-blue-400"></i>Equipment Data</li>
+                        <li class="flex items-center"><i class="fas fa-tools mr-2 text-xs text-blue-400"></i>Maintenance Logs</li>
+                        <li class="flex items-center"><i class="fas fa-wave-square mr-2 text-xs text-blue-400"></i>Sensor Data</li>
+                        <li class="flex items-center"><i class="fas fa-exclamation-triangle mr-2 text-xs text-blue-400"></i>Incident Reports</li>
+                    </ul>
+                </div>
+
+                <!-- FastAPI Backend -->
+                <div class="component-box bg-teal-900 border border-teal-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-server mr-2 text-teal-300"></i>
+                        <h3 class="font-bold text-lg">FastAPI Backend</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-plug mr-2 text-xs text-teal-400"></i>REST APIs</li>
+                        <li class="flex items-center"><i class="fas fa-route mr-2 text-xs text-teal-400"></i>Endpoints</li>
+                        <li class="flex items-center"><i class="fas fa-shield-alt mr-2 text-xs text-teal-400"></i>Authentication</li>
+                        <li class="flex items-center"><i class="fas fa-tachometer-alt mr-2 text-xs text-teal-400"></i>Performance</li>
+                    </ul>
+                </div>
+
+                <!-- NVIDIA RAPIDS Time Series -->
+                <div class="nvidia-glow rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/235_Nvidia_logo-1024.png" alt="NVIDIA" class="nvidia-logo">
+                        <h3 class="font-bold text-lg">NVIDIA RAPIDS</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-clock mr-2 text-xs text-green-400"></i>Time Series Generation</li>
+                        <li class="flex items-center"><i class="fas fa-microchip mr-2 text-xs text-green-400"></i>RAPIDS cuML</li>
+                        <li class="flex items-center"><i class="fas fa-chart-line mr-2 text-xs text-green-400"></i>GPU Accelerated Training</li>
+                        <li class="flex items-center"><i class="fas fa-bolt mr-2 text-xs text-green-400"></i>Real-time Inference</li>
+                        <li class="flex items-center"><i class="fas fa-database mr-2 text-xs text-green-400"></i>cuDF Data Processing</li>
+                    </ul>
+                </div>
+
+                <!-- Google ADK -->
+                <div class="component-box bg-indigo-900 border border-indigo-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-robot mr-2 text-indigo-300"></i>
+                        <h3 class="font-bold text-lg">Google ADK</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-microchip mr-2 text-xs text-indigo-400"></i>Equipment AI</li>
+                        <li class="flex items-center"><i class="fas fa-search mr-2 text-xs text-indigo-400"></i>Search Agent</li>
+                        <li class="flex items-center"><i class="fas fa-processor mr-2 text-xs text-indigo-400"></i>Data Processor</li>
+                        <li class="flex items-center"><i class="fas fa-cog mr-2 text-xs text-indigo-400"></i>Config Mgmt</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Middle Section -->
+            <div class="grid grid-cols-12 gap-6 mb-8">
+                <!-- Business Services Layer -->
+                <div class="col-span-8 component-box bg-slate-900 border border-slate-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-briefcase mr-2 text-slate-300"></i>
+                        <h3 class="font-bold text-lg">Business Services Layer</h3>
+                    </div>
+                    <div class="grid grid-cols-5 gap-3 text-sm">
+                        <div class="text-center">
+                            <i class="fas fa-chart-bar mb-1 text-slate-400"></i>
+                            <div>Predictive Maintenance</div>
+                            <div class="text-xs text-green-400 mt-1">(NVIDIA DLI)</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-list mb-1 text-slate-400"></i>
+                            <div>Equipment Management</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-exclamation-triangle mb-1 text-slate-400"></i>
+                            <div>Anomaly Detection</div>
+                            <div class="text-xs text-green-400 mt-1">(NV-Tesseract)</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-tachometer-alt mb-1 text-slate-400"></i>
+                            <div>Risk Assessment</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-clock mb-1 text-slate-400"></i>
+                            <div>Time Series Analysis</div>
+                            <div class="text-xs text-green-400 mt-1">(RAPIDS)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NVIDIA NV-Tesseract -->
+                <div class="col-span-4 nvidia-glow rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/235_Nvidia_logo-1024.png" alt="NVIDIA" class="nvidia-logo">
+                        <h3 class="font-bold text-lg">NVIDIA NV-Tesseract</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-network-wired mr-2 text-xs text-green-400"></i>Network KPI Analysis</li>
+                        <li class="flex items-center"><i class="fas fa-microchip mr-2 text-xs text-green-400"></i>NVIDIA NIM Integration</li>
+                        <li class="flex items-center"><i class="fas fa-exclamation-triangle mr-2 text-xs text-green-400"></i>Subtle Equipment Faults</li>
+                        <li class="flex items-center"><i class="fas fa-chart-line mr-2 text-xs text-green-400"></i>Anomaly Detection</li>
+                        <li class="flex items-center"><i class="fas fa-bolt mr-2 text-xs text-green-400"></i>Real-time Monitoring</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Frontend and NVIDIA DLI Layer -->
+            <div class="grid grid-cols-3 gap-6 mb-8">
+                <!-- Frontend Layer -->
+                <div class="col-span-2 component-box bg-gray-900 border border-gray-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-desktop mr-2 text-gray-300"></i>
+                            <h3 class="font-bold text-lg">Frontend Layer</h3>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-sm">
+                            <div class="text-center">
+                                <i class="fas fa-tachometer-alt mb-2 text-2xl text-gray-400"></i>
+                                <div>Dashboard</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-list-ul mb-2 text-2xl text-gray-400"></i>
+                                <div>Equipment List</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-chart-line mb-2 text-2xl text-gray-400"></i>
+                                <div>Analytics</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-compass mb-2 text-2xl text-gray-400"></i>
+                                <div>Navigation</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-eye mb-2 text-2xl text-gray-400"></i>
+                                <div>Data Viewer</div>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-file-alt mb-2 text-2xl text-gray-400"></i>
+                                <div>Reports</div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- NVIDIA DLI Predictive Maintenance -->
+                <div class="nvidia-glow rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/235_Nvidia_logo-1024.png" alt="NVIDIA" class="nvidia-logo">
+                        <h3 class="font-bold text-lg">NVIDIA DLI Framework</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-wrench mr-2 text-xs text-green-400"></i>Predictive Maintenance</li>
+                        <li class="flex items-center"><i class="fas fa-exclamation-triangle mr-2 text-xs text-green-400"></i>Anomaly Detection</li>
+                        <li class="flex items-center"><i class="fas fa-chart-line mr-2 text-xs text-green-400"></i>Failure Prediction</li>
+                        <li class="flex items-center"><i class="fas fa-clock mr-2 text-xs text-green-400"></i>RUL Estimation</li>
+                        <li class="flex items-center"><i class="fas fa-brain mr-2 text-xs text-green-400"></i>Deep Learning Models</li>
+                        <li class="flex items-center"><i class="fas fa-graduation-cap mr-2 text-xs text-green-400"></i>DLI Training Framework</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Row Components -->
+            <div class="grid grid-cols-4 gap-6">
+                <!-- External APIs -->
+                <div class="component-box bg-emerald-900 border border-emerald-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-plug mr-2 text-emerald-300"></i>
+                        <h3 class="font-bold text-lg">External APIs</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fab fa-google mr-2 text-xs text-emerald-400"></i>Google Search API</li>
+                        <li class="flex items-center"><i class="fas fa-database mr-2 text-xs text-emerald-400"></i>Equipment Databases</li>
+                    </ul>
+                </div>
+
+                <!-- Testing Framework -->
+                <div class="component-box bg-orange-900 border border-orange-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-vial mr-2 text-orange-300"></i>
+                        <h3 class="font-bold text-lg">Testing Framework</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-2 text-xs text-orange-400"></i>Unit Tests</li>
+                        <li class="flex items-center"><i class="fas fa-cogs mr-2 text-xs text-orange-400"></i>Integration Tests</li>
+                        <li class="flex items-center"><i class="fas fa-tachometer-alt mr-2 text-xs text-orange-400"></i>Performance Tests</li>
+                        <li class="flex items-center"><i class="fas fa-robot mr-2 text-xs text-orange-400"></i>Automated Testing</li>
+                        <li class="flex items-center"><i class="fas fa-chart-line mr-2 text-xs text-orange-400"></i>Test Analytics</li>
+                    </ul>
+                </div>
+
+                <!-- Deployment -->
+                <div class="component-box bg-blue-900 border border-blue-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-rocket mr-2 text-blue-300"></i>
+                        <h3 class="font-bold text-lg">Deployment</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-server mr-2 text-xs text-blue-400"></i>Uvicorn</li>
+                        <li class="flex items-center"><i class="fab fa-docker mr-2 text-xs text-blue-400"></i>Docker Ready</li>
+                        <li class="flex items-center"><i class="fas fa-industry mr-2 text-xs text-blue-400"></i>Production</li>
+                        <li class="flex items-center"><i class="fas fa-terminal mr-2 text-xs text-blue-400"></i>Batch Scripts</li>
+                    </ul>
+                </div>
+
+                <!-- Configuration -->
+                <div class="component-box bg-amber-900 border border-amber-700 text-white rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-cogs mr-2 text-amber-300"></i>
+                        <h3 class="font-bold text-lg">Configuration</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center"><i class="fas fa-user-cog mr-2 text-xs text-amber-400"></i>Agent Config</li>
+                        <li class="flex items-center"><i class="fas fa-brain mr-2 text-xs text-amber-400"></i>ML Models</li>
+                        <li class="flex items-center"><i class="fas fa-key mr-2 text-xs text-amber-400"></i>API Keys</li>
+                        <li class="flex items-center"><i class="fas fa-globe mr-2 text-xs text-amber-400"></i>Environment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Connection Arrows SVG -->
+            <svg class="absolute inset-0 pointer-events-none" style="z-index: 10;">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
+                    </marker>
+                    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#10b981" />
+                    </marker>
+                    <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="max-w-7xl mx-auto mt-8">
+        <div class="bg-white rounded-lg p-6">
+            <h3 class="text-lg font-bold mb-4">Architecture Legend</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-blue-900 border border-blue-700 mr-2 rounded"></div>
+                    <span class="text-sm text-white">Data & Storage</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-teal-900 border border-teal-700 mr-2 rounded"></div>
+                    <span class="text-sm text-white">API & Backend</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 nvidia-glow border border-green-700 mr-2 rounded" style="width: 16px; height: 16px;"></div>
+                    <span class="text-sm text-white">NVIDIA AI/ML Components</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-green-600 border border-green-500 mr-2 rounded"></div>
+                    <span class="text-sm text-white">NVIDIA-Powered Services</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 bg-indigo-900 border border-indigo-700 mr-2 rounded"></div>
+                    <span class="text-sm text-white">Google ADK</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JPG Generation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('generateJpg').addEventListener('click', function() {
+                const button = this;
+                const originalText = button.innerHTML;
+                
+                // Show loading state
+                button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Generating JPG...';
+                button.disabled = true;
+                
+                // Use html2canvas to capture the diagram
+                setTimeout(() => {
+                    if (typeof html2canvas !== 'undefined') {
+                        // Load html2canvas from CDN
+                        const script = document.createElement('script');
+                        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                        script.onload = function() {
+                            // Capture the architecture diagram
+                            const element = document.querySelector('.max-w-7xl');
+                            html2canvas(element, {
+                                backgroundColor: '#0f172a',
+                                scale: 2,
+                                useCORS: true,
+                                allowTaint: true
+                            }).then(canvas => {
+                                // Convert to JPG and download
+                                const link = document.createElement('a');
+                                link.download = 'sentinel2_architecture_diagram_nvidia_final.jpg';
+                                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                                link.click();
+                                
+                                // Reset button
+                                button.innerHTML = originalText;
+                                button.disabled = false;
+                            }).catch(error => {
+                                console.error('Error generating JPG:', error);
+                                button.innerHTML = originalText;
+                                button.disabled = false;
+                            });
+                        };
+                        document.head.appendChild(script);
+                    } else {
+                        // Fallback message if html2canvas fails to load
+                        alert('JPG generation requires html2canvas library. Please check your internet connection and try again.');
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
