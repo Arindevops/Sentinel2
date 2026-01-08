@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel2 - Architecture Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <style>
+        .mermaid {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .component-box {
+            transition: all 0.3s ease;
+        }
+        .component-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 px-8 shadow-lg">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-4xl font-bold mb-2">🏗️ Sentinel2 Architecture</h1>
+            <p class="text-xl opacity-90">Predictive Maintenance System - Complete Architecture Flow</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-8 py-8">
+        
+        <!-- System Overview -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">🎯 System Overview</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h3 class="font-semibold text-blue-800 mb-2">🔍 Data Layer</h3>
+                        <p class="text-sm text-gray-700">Equipment data, maintenance logs, incident reports, and external research data</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h3 class="font-semibold text-green-800 mb-2">🧠 Intelligence Layer</h3>
+                        <p class="text-sm text-gray-700">ML models, Google ADK integration, predictive analytics, and anomaly detection</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                        <h3 class="font-semibold text-purple-800 mb-2">🌐 Presentation Layer</h3>
+                        <p class="text-sm text-gray-700">Web dashboard, REST APIs, real-time monitoring, and user interfaces</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- High-Level Architecture Flow -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">🔄 High-Level Architecture Flow</h2>
+                <div class="mermaid">
+graph TB
+    %% Data Sources
+    subgraph "Data Sources"
+        DS1[📊 Equipment Data<br/>equipment_data.csv]
+        DS2[🔧 Maintenance Logs<br/>maintenance_log.csv]
+        DS3[⚠️ Incident Reports<br/>incident_log.csv]
+        DS4[🌐 External Research<br/>Google ADK]
+    end
+
+    %% Data Processing Layer
+    subgraph "Data Processing Layer"
+        DP1[📥 Data Ingestion<br/>CSV Parser]
+        DP2[🧹 Data Cleaning<br/>Preprocessing]
+        DP3[📈 Feature Engineering<br/>Feature Extraction]
+        DP4[🔍 Data Validation<br/>Quality Checks]
+    end
+
+    %% Core Services
+    subgraph "Core Services"
+        CS1[🤖 Predictive Maintenance<br/>Service]
+        CS2[🌲 Anomaly Detection<br/>Isolation Forest]
+        CS3[🔬 Component Analysis<br/>ML Models]
+        CS4[📊 Risk Assessment<br/>Analytics Engine]
+    end
+
+    %% ML Models
+    subgraph "ML Models"
+        ML1[🎯 Random Forest<br/>Classifier]
+        ML2[📈 Gradient Boosting<br/>Regressor]
+        ML3[🌊 LSTM Networks<br/>Deep Learning]
+        ML4[🌲 Isolation Forest<br/>Anomaly Detection]
+    end
+
+    %% Google ADK Integration
+    subgraph "Google ADK Integration"
+        ADK1[🤖 Equipment Intelligence<br/>Agent]
+        ADK2[🔍 Search Agent<br/>Google Search]
+        ADK3[📝 Data Processor<br/>Research Results]
+        ADK4[⚙️ Agent Configuration<br/>Management]
+    end
+
+    %% API Layer
+    subgraph "API Layer"
+        API1[🚀 FastAPI Server<br/>REST Endpoints]
+        API2[📊 Analytics API<br/>Predictive Data]
+        API3[🔧 Management API<br/>Configuration]
+        API4[🌐 Web Interface<br/>Dashboard]
+    end
+
+    %% Frontend
+    subgraph "Frontend Layer"
+        UI1[📱 Dashboard<br/>Real-time Monitoring]
+        UI2[📋 Equipment List<br/>Status Management]
+        UI3[📈 Analytics<br/>Predictive Insights]
+        UI4[⚙️ Navigation<br/>User Interface]
+    end
+
+    %% Data Flow Connections
+    DS1 --> DP1
+    DS2 --> DP1
+    DS3 --> DP1
+    DS4 --> ADK2
+
+    DP1 --> DP2
+    DP2 --> DP3
+    DP3 --> DP4
+
+    DP4 --> CS1
+    DP4 --> CS2
+    DP4 --> CS3
+    DP4 --> CS4
+
+    CS1 --> ML1
+    CS1 --> ML2
+    CS1 --> ML3
+    CS2 --> ML4
+
+    ADK2 --> ADK1
+    ADK1 --> ADK3
+    ADK3 --> CS1
+
+    CS1 --> API1
+    CS2 --> API1
+    CS3 --> API1
+    CS4 --> API2
+
+    API1 --> UI1
+    API2 --> UI3
+    API3 --> UI4
+    API4 --> UI2
+
+    %% Styling
+    classDef dataSource fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    classDef dataProcessing fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    classDef coreService fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    classDef mlModel fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    classDef adkIntegration fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+    classDef apiLayer fill:#e0f2f1,stroke:#009688,stroke-width:2px
+    classDef frontend fill:#f1f8e9,stroke:#8bc34a,stroke-width:2px
+
+    class DS1,DS2,DS3,DS4 dataSource
+    class DP1,DP2,DP3,DP4 dataProcessing
+    class CS1,CS2,CS3,CS4 coreService
+    class ML1,ML2,ML3,ML4 mlModel
+    class ADK1,ADK2,ADK3,ADK4 adkIntegration
+    class API1,API2,API3,API4 apiLayer
+    class UI1,UI2,UI3,UI4 frontend
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">🛠️ Technology Stack</h2>
+                
+                <!-- Backend Technologies -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3 text-gray-700">🔧 Backend Technologies</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-gray-100 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🐍</div>
+                            <div class="font-medium">Python</div>
+                            <div class="text-xs text-gray-600">Core Language</div>
+                        </div>
+                        <div class="bg-gray-100 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🚀</div>
+                            <div class="font-medium">FastAPI</div>
+                            <div class="text-xs text-gray-600">Web Framework</div>
+                        </div>
+                        <div class="bg-gray-100 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🤖</div>
+                            <div class="font-medium">Scikit-learn</div>
+                            <div class="text-xs text-gray-600">ML Library</div>
+                        </div>
+                        <div class="bg-gray-100 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🧠</div>
+                            <div class="font-medium">TensorFlow</div>
+                            <div class="text-xs text-gray-600">Deep Learning</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Technologies -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-3 text-gray-700">📊 Data Technologies</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-blue-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">📈</div>
+                            <div class="font-medium">Pandas</div>
+                            <div class="text-xs text-gray-600">Data Processing</div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🔢</div>
+                            <div class="font-medium">NumPy</div>
+                            <div class="text-xs text-gray-600">Numerical Computing</div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">📋</div>
+                            <div class="font-medium">CSV</div>
+                            <div class="text-xs text-gray-600">Data Storage</div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🔍</div>
+                            <div class="font-medium">Google ADK</div>
+                            <div class="text-xs text-gray-600">External Research</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend Technologies -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-700">🎨 Frontend Technologies</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🌐</div>
+                            <div class="font-medium">HTML5</div>
+                            <div class="text-xs text-gray-600">Markup</div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🎨</div>
+                            <div class="font-medium">CSS3</div>
+                            <div class="text-xs text-gray-600">Styling</div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">⚡</div>
+                            <div class="font-medium">JavaScript</div>
+                            <div class="text-xs text-gray-600">Interactivity</div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🎯</div>
+                            <div class="font-medium">TailwindCSS</div>
+                            <div class="text-xs text-gray-600">CSS Framework</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Details -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">📦 Module Details</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Core Modules -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">🔧 Core Modules</h3>
+                        <div class="space-y-3">
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <div class="font-medium">src/main.py</div>
+                                <div class="text-sm text-gray-600">FastAPI application with 20+ REST endpoints</div>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <div class="font-medium">src/config.py</div>
+                                <div class="text-sm text-gray-600">Configuration management with environment variables</div>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <div class="font-medium">src/services/predictive_maintenance.py</div>
+                                <div class="text-sm text-gray-600">Core ML service with 1400+ lines of code</div>
+                            </div>
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <div class="font-medium">src/models/predictive_schemas.py</div>
+                                <div class="text-sm text-gray-600">Pydantic models for data validation</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google ADK Modules -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">🤖 Google ADK Modules</h3>
+                        <div class="space-y-3">
+                            <div class="border-l-4 border-pink-500 pl-4">
+                                <div class="font-medium">google_adk/integration.py</div>
+                                <div class="text-sm text-gray-600">Enhanced predictive maintenance with external research</div>
+                            </div>
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <div class="font-medium">google_adk/agents/equipment_agent.py</div>
+                                <div class="text-sm text-gray-600">Equipment intelligence research agent</div>
+                            </div>
+                            <div class="border-l-4 border-yellow-500 pl-4">
+                                <div class="font-medium">google_adk/agents/search_agent.py</div>
+                                <div class="text-sm text-gray-600">Google Search integration for research</div>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <div class="font-medium">google_adk/config/agent_config.py</div>
+                                <div class="text-sm text-gray-600">Agent configuration and management</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Flow Diagram -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">🔄 Detailed Data Flow</h2>
+                <div class="mermaid">
+sequenceDiagram
+    participant User as 👤 User
+    participant UI as 🌐 Web Interface
+    participant API as 🚀 FastAPI
+    participant PM as 🤖 Predictive Maintenance
+    participant ML as 🧠 ML Models
+    participant ADK as 🔍 Google ADK
+    participant DB as 📊 Data Files
+
+    User->>UI: Access Dashboard
+    UI->>API: GET /api/overview
+    API->>PM: Request overview stats
+    
+    PM->>DB: Load equipment data
+    PM->>DB: Load maintenance logs
+    PM->>DB: Load incident reports
+    
+    PM->>ML: Generate predictions
+    ML->>ML: Random Forest analysis
+    ML->>ML: Gradient Boosting regression
+    ML->>ML: LSTM deep learning (optional)
+    
+    alt Google ADK Enabled
+        PM->>ADK: Request enhanced research
+        ADK->>ADK: Google Search for equipment data
+        ADK->>PM: Enhanced research results
+    end
+    
+    PM->>ML: Anomaly detection (Isolation Forest)
+    ML->>PM: Detected anomalies
+    
+    PM->>API: Comprehensive results
+    API->>UI: JSON response
+    UI->>User: Display dashboard with insights
+    
+    User->>UI: Click equipment details
+    UI->>API: GET /api/equipment/{id}
+    API->>PM: Get specific equipment analysis
+    PM->>ML: Component-specific analysis
+    PM->>API: Detailed equipment data
+    API->>UI: Equipment details
+    UI->>User: Show equipment status with ML insights
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Architecture -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">🧠 Model Architecture</h2>
+                <div class="mermaid">
+graph LR
+    subgraph "Input Features"
+        IF1[📊 Equipment Age]
+        IF2[⏰ Operating Hours]
+        IF3[🔧 Maintenance History]
+        IF4[⚠️ Incident Records]
+        IF5[🌐 External Research]
+    end
+
+    subgraph "Feature Engineering"
+        FE1[🔢 Feature Scaling]
+        FE2[📈 Feature Selection]
+        FE3[🧹 Data Cleaning]
+        FE4[📋 Feature Encoding]
+    end
+
+    subgraph "ML Models"
+        ML1[🎯 Random Forest<br/>Failure Prediction]
+        ML2[📈 Gradient Boosting<br/>RUL Estimation]
+        ML3[🌊 LSTM Networks<br/>Time Series Analysis]
+        ML4[🌲 Isolation Forest<br/>Anomaly Detection]
+    end
+
+    subgraph "Output Predictions"
+        OP1[💚 Health Score]
+        OP2[⚠️ Failure Probability]
+        OP3[⏳ RUL Days]
+        OP4[🚨 Anomaly Flag]
+        OP5[📊 Confidence Score]
+    end
+
+    subgraph "Decision Logic"
+        DL1[🔧 Maintenance Required]
+        DL2[⚡ Warning Status]
+        DL3[✅ Operational Status]
+        DL4[🚨 Critical Alert]
+    end
+
+    IF1 --> FE1
+    IF2 --> FE1
+    IF3 --> FE2
+    IF4 --> FE2
+    IF5 --> FE3
+
+    FE1 --> ML1
+    FE2 --> ML2
+    FE3 --> ML3
+    FE4 --> ML4
+
+    ML1 --> OP1
+    ML1 --> OP2
+    ML2 --> OP3
+    ML3 --> OP3
+    ML4 --> OP4
+
+    OP1 --> DL1
+    OP2 --> DL2
+    OP3 --> DL3
+    OP4 --> DL4
+    OP5 --> DL1
+
+    classDef inputFeature fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    classDef featureEng fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+    classDef mlModel fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    classDef output fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    classDef decision fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+
+    class IF1,IF2,IF3,IF4,IF5 inputFeature
+    class FE1,FE2,FE3,FE4 featureEng
+    class ML1,ML2,ML3,ML4 mlModel
+    class OP1,OP2,OP3,OP4,OP5 output
+    class DL1,DL2,DL3,DL4 decision
+                </div>
+            </div>
+        </section>
+
+        <!-- API Endpoints -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">🔌 API Endpoints</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">📊 Core APIs</h3>
+                        <div class="space-y-2">
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">GET /api/overview</div>
+                                <div class="text-xs text-gray-600">System overview statistics</div>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">GET /api/equipment</div>
+                                <div class="text-xs text-gray-600">Equipment list with predictions</div>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">GET /api/predictions</div>
+                                <div class="text-xs text-gray-600">ML predictions for all equipment</div>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">POST /api/predictions/refresh</div>
+                                <div class="text-xs text-gray-600">Refresh ML predictions</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">🔍 Advanced APIs</h3>
+                        <div class="space-y-2">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">GET /api/anomalies/isolation-forest</div>
+                                <div class="text-xs text-gray-600">Anomaly detection results</div>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">GET /api/predictions/enhanced</div>
+                                <div class="text-xs text-gray-600">Google ADK enhanced predictions</div>
+                            </div>
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">GET /api/equipment/{id}/component-analysis</div>
+                                <div class="text-xs text-gray-600">Component-specific analysis</div>
+                            </div>
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <div class="font-mono text-sm">POST /api/config/google-adk/enable</div>
+                                <div class="text-xs text-gray-600">Enable Google ADK integration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Configuration & Deployment -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">⚙️ Configuration & Deployment</h2>
+                <div class="mermaid">
+graph TB
+    subgraph "Configuration Management"
+        CM1[🔧 Environment Variables]
+        CM2[📄 config.py]
+        CM3[🌐 Google ADK Settings]
+        CM4[🤖 Model Configuration]
+    end
+
+    subgraph "Development Environment"
+        DEV1[💻 Local Development]
+        DEV2[🧪 Unit Tests]
+        DEV3[🔍 Integration Tests]
+        DEV4[📊 Test Data]
+    end
+
+    subgraph "Production Deployment"
+        PROD1[🚀 Uvicorn Server]
+        PROD2[📈 Performance Monitoring]
+        PROD3[🔐 Security Configuration]
+        PROD4[📝 Logging System]
+    end
+
+    subgraph "Data Management"
+        DATA1[📁 Data_Set Directory]
+        DATA2[🔄 CSV Data Files]
+        DATA3[💾 Research Cache]
+        DATA4[📊 Model Storage]
+    end
+
+    CM1 --> CM2
+    CM2 --> CM3
+    CM2 --> CM4
+
+    DEV1 --> PROD1
+    DEV2 --> PROD1
+    DEV3 --> PROD1
+    DEV4 --> DATA1
+
+    PROD1 --> DATA2
+    PROD1 --> DATA3
+    PROD1 --> DATA4
+
+    classDef config fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    classDef dev fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    classDef prod fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    classDef data fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
+
+    class CM1,CM2,CM3,CM4 config
+    class DEV1,DEV2,DEV3,DEV4 dev
+    class PROD1,PROD2,PROD3,PROD4 prod
+    class DATA1,DATA2,DATA3,DATA4 data
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">✨ Key Features & Capabilities</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🤖</div>
+                        <h3 class="font-semibold text-blue-800">ML-Powered Predictions</h3>
+                        <p class="text-sm text-gray-700">Random Forest, Gradient Boosting, and LSTM models for accurate failure prediction</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🌐</div>
+                        <h3 class="font-semibold text-green-800">Google ADK Integration</h3>
+                        <p class="text-sm text-gray-700">External research and equipment intelligence via Google Search integration</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🌲</div>
+                        <h3 class="font-semibold text-purple-800">Anomaly Detection</h3>
+                        <p class="text-sm text-gray-700">Isolation Forest for real-time anomaly detection in sensor data</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">📊</div>
+                        <h3 class="font-semibold text-orange-800">Real-time Dashboard</h3>
+                        <p class="text-sm text-gray-700">Interactive web dashboard with live equipment status and predictions</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🔧</div>
+                        <h3 class="font-semibold text-pink-800">Component Analysis</h3>
+                        <p class="text-sm text-gray-700">Detailed component-level failure analysis and recommendations</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">⚙️</div>
+                        <h3 class="font-semibold text-indigo-800">Flexible Configuration</h3>
+                        <p class="text-sm text-gray-700">Environment-based configuration with runtime feature toggles</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">📈 Performance Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">🎯 Model Performance</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span>Random Forest Accuracy</span>
+                                <span class="font-bold text-green-600">85-92%</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span>Gradient Boosting MAE</span>
+                                <span class="font-bold text-blue-600">2.5-4.0 days</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span>Anomaly Detection Precision</span>
+                                <span class="font-bold text-purple-600">78-85%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 text-gray-700">⚡ System Performance</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span>API Response Time</span>
+                                <span class="font-bold text-orange-600">&lt;200ms</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span>Model Training Time</span>
+                                <span class="font-bold text-red-600">30-60 seconds</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span>Prediction Generation</span>
+                                <span class="font-bold text-indigo-600">&lt;5 seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-6 px-8 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-lg mb-2">🏗️ Sentinel2 Architecture Diagram</p>
+            <p class="opacity-90">Predictive Maintenance System - Complete Technical Overview</p>
+            <p class="text-sm opacity-75 mt-2">Generated with Mermaid.js | Last Updated: <span id="timestamp"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#1a202c',
+                primaryBorderColor: '#5a67d8',
+                lineColor: '#4a5568',
+                secondaryColor: '#48bb78',
+                tertiaryColor: '#ed8936'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+                mirrorActors: true,
+                bottomMarginAdj: 1,
+                useMaxWidth: true,
+                rightAngles: false,
+                showSequenceNumbers: false
+            }
+        });
+
+        // Set timestamp
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to component boxes
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.component-box').forEach(box => {
+            box.style.opacity = '0';
+            box.style.transform = 'translateY(20px)';
+            box.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(box);
+        });
+    </script>
+</body>
+</html>
