@@ -11,23 +11,123 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ffffff;
         }
         .component-box {
             transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+            background: #ffffff;
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                0 1px 3px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+                inset 1px 0 0 rgba(0, 0, 0, 0.05),
+                inset -1px 0 0 rgba(0, 0, 0, 0.05);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            clip-path: polygon(
+                0 0,
+                calc(100% - 8px) 0,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0 calc(100% - 8px),
+                0 8px
+            );
         }
         .component-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 10px 20px rgba(0, 0, 0, 0.1),
+                inset 0 2px 0 rgba(255, 255, 255, 0.9),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+                inset 2px 0 0 rgba(0, 0, 0, 0.05),
+                inset -2px 0 0 rgba(0, 0, 0, 0.05);
+            border-color: #3b82f6;
+            background: #ffffff;
+            clip-path: polygon(
+                0 0,
+                calc(100% - 12px) 0,
+                100% 12px,
+                100% calc(100% - 12px),
+                calc(100% - 12px) 100%,
+                12px 100%,
+                0 calc(100% - 12px),
+                0 12px
+            );
+        }
+        .vibrant-header {
+            background: #ffffff;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.9),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+                inset 2px 0 0 rgba(0, 0, 0, 0.05),
+                inset -2px 0 0 rgba(0, 0, 0, 0.05);
+            transform-style: preserve-3d;
+            clip-path: polygon(
+                0 0,
+                calc(100% - 15px) 0,
+                100% 15px,
+                100% calc(100% - 15px),
+                calc(100% - 15px) 100%,
+                15px 100%,
+                0 calc(100% - 15px),
+                0 15px
+            );
+        }
+        .vibrant-section {
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+                inset 1px 0 0 rgba(0, 0, 0, 0.05),
+                inset -1px 0 0 rgba(0, 0, 0, 0.05);
+            clip-path: polygon(
+                0 0,
+                calc(100% - 10px) 0,
+                100% 10px,
+                100% calc(100% - 10px),
+                calc(100% - 10px) 100%,
+                10px 100%,
+                0 calc(100% - 10px),
+                0 10px
+            );
+        }
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+        .card-3d:hover {
+            transform: translateZ(20px) rotateX(1deg) rotateY(-1deg);
+        }
+        .text-3d {
+            text-shadow: 
+                0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b9b9b9,
+                0 5px 0 #aaa,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25);
         }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="gradient-bg text-white py-6 px-8 shadow-lg">
+    <header class="vibrant-header text-gray-800 py-8 px-8 shadow-2xl">
         <div class="max-w-7xl mx-auto">
-            <h1 class="text-4xl font-bold mb-2">🏗️ Sentinel2 Architecture</h1>
-            <p class="text-xl opacity-90">Predictive Maintenance System - Complete Architecture Flow</p>
+            <h1 class="text-5xl font-bold mb-3">🏗️ Sentinel2 Architecture</h1>
+            <p class="text-2xl text-gray-600">Predictive Maintenance System - Complete Architecture Flow</p>
         </div>
     </header>
 
@@ -57,16 +157,21 @@
 
         <!-- High-Level Architecture Flow -->
         <section class="mb-12">
-            <div class="bg-white rounded-lg shadow-lg p-6 component-box">
-                <h2 class="text-2xl font-bold mb-6 text-gray-800">🔄 High-Level Architecture Flow</h2>
+            <div class="vibrant-section rounded-2xl shadow-2xl p-8 component-box card-3d">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800 flex items-center">
+                    <span class="mr-3">🔄</span> High-Level Architecture Flow
+                </h2>
                 <div class="mermaid">
 graph TB
     %% Data Sources
     subgraph "Data Sources"
+        DS4[🌐 External Research<br/>Google ADK]
         DS1[📊 Equipment Data<br/>equipment_data.csv]
         DS2[🔧 Maintenance Logs<br/>maintenance_log.csv]
         DS3[⚠️ Incident Reports<br/>incident_log.csv]
-        DS4[🌐 External Research<br/>Google ADK]
+        DS5[📡 Sensor Data<br/>sensor_readings.csv]
+        DS6[🌡️ Temperature Data<br/>temperature_sensors.csv]
+        DS7[⚡ Power Data<br/>power_consumption.csv]
     end
 
     %% Data Processing Layer
@@ -75,6 +180,16 @@ graph TB
         DP2[🧹 Data Cleaning<br/>Preprocessing]
         DP3[📈 Feature Engineering<br/>Feature Extraction]
         DP4[🔍 Data Validation<br/>Quality Checks]
+    end
+
+    %% Google ADK Integration
+    subgraph "Google ADK Integration"
+        ADK1[🤖 Equipment Intelligence<br/>Agent]
+        ADK2[🔍 Search Agent<br/>Google Search]
+        ADK3[📝 Data Processor<br/>Research Results]
+        ADK4[⚙️ Agent Configuration<br/>Management]
+        ADK5[💭 Sentiment Analysis<br/>Review Processing Agent]
+        ADK6[📊 Reliability Scoring<br/>Trust Metrics Agent]
     end
 
     %% Core Services
@@ -91,14 +206,6 @@ graph TB
         ML2[📈 Gradient Boosting<br/>Regressor]
         ML3[🌊 LSTM Networks<br/>Deep Learning]
         ML4[🌲 Isolation Forest<br/>Anomaly Detection]
-    end
-
-    %% Google ADK Integration
-    subgraph "Google ADK Integration"
-        ADK1[🤖 Equipment Intelligence<br/>Agent]
-        ADK2[🔍 Search Agent<br/>Google Search]
-        ADK3[📝 Data Processor<br/>Research Results]
-        ADK4[⚙️ Agent Configuration<br/>Management]
     end
 
     %% API Layer
@@ -118,10 +225,13 @@ graph TB
     end
 
     %% Data Flow Connections
+    DS4 --> ADK2
     DS1 --> DP1
     DS2 --> DP1
     DS3 --> DP1
-    DS4 --> ADK2
+    DS5 --> DP1
+    DS6 --> DP1
+    DS7 --> DP1
 
     DP1 --> DP2
     DP2 --> DP3
@@ -139,6 +249,10 @@ graph TB
 
     ADK2 --> ADK1
     ADK1 --> ADK3
+    ADK1 --> ADK5
+    ADK1 --> ADK6
+    ADK5 --> ADK3
+    ADK6 --> ADK3
     ADK3 --> CS1
 
     CS1 --> API1
@@ -152,19 +266,20 @@ graph TB
     API4 --> UI2
 
     %% Styling
-    classDef dataSource fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    classDef dataProcessing fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
-    classDef coreService fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-    classDef mlModel fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-    classDef adkIntegration fill:#fce4ec,stroke:#e91e63,stroke-width:2px
-    classDef apiLayer fill:#e0f2f1,stroke:#009688,stroke-width:2px
-    classDef frontend fill:#f1f8e9,stroke:#8bc34a,stroke-width:2px
+    classDef externalData fill:#e3f2fd,stroke:#1976d2,stroke-width:3px,color:#0d47a1
+    classDef dataIngestion fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#4a148c
+    classDef coreEngine fill:#e8f5e8,stroke:#388e3c,stroke-width:3px,color:#1b5e20
+    classDef mlModels fill:#fff3e0,stroke:#f57c00,stroke-width:3px,color:#e65100
+    classDef adkIntegration fill:#fce4ec,stroke:#c2185b,stroke-width:3px,color:#880e4f
+    classDef apiLayer fill:#e0f2f1,stroke:#00796b,stroke-width:3px,color:#004d40
+    classDef frontend fill:#f1f8e9,stroke:#689f38,stroke-width:3px,color:#33691e
 
-    class DS1,DS2,DS3,DS4 dataSource
-    class DP1,DP2,DP3,DP4 dataProcessing
-    class CS1,CS2,CS3,CS4 coreService
-    class ML1,ML2,ML3,ML4 mlModel
-    class ADK1,ADK2,ADK3,ADK4 adkIntegration
+    class DS4 externalData
+    class DS1,DS2,DS3,DS5,DS6,DS7 externalData
+    class DP1,DP2,DP3,DP4 dataIngestion
+    class CPE1,CPE2,CPE3,CPE4 coreEngine
+    class ML1,ML2,ML3,ML4 mlModels
+    class ADK1,ADK2,ADK3,ADK4,ADK5,ADK6 adkIntegration
     class API1,API2,API3,API4 apiLayer
     class UI1,UI2,UI3,UI4 frontend
                 </div>
